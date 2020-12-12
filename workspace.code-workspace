@@ -1,0 +1,30 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "Project root"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			".nyc_output/": true,
+			"node_modules/": true,
+			"coverage/": false,
+			"docs/": false,
+			"**/dist/": false
+		},
+		"cSpell.words": [
+			"zekfad",
+			"Yaroslav",
+			"Vorobev",
+			"npm",
+			"yarn",
+			"fnames",
+			"typeofs",
+			"lcov",
+			"codecov",
+			"collapsibles",
+			"LOCALAPPDATA"
+		],
+	}
+}

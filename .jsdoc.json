@@ -1,0 +1,32 @@
+{
+	"tags": {
+		"allowUnknownTags": true,
+		"dictionaries": [ "jsdoc" ]
+	},
+	"source": {
+		"include": [ ".", "package.json", "ReadMe.md" ],
+		"includePattern": "src.*\\.js$",
+		"excludePattern": "(node_modules|docs|test|dist|rollup.config.js)"
+	},
+	"plugins": [
+		"plugins/markdown"
+	],
+	"templates": {
+		"name": "stub",
+		"footerText": "stub",
+		"useCollapsibles": true,
+		"logo": {
+			"url": "data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 30 5&quot;><text xmlns=&quot;http://www.w3.org/2000/svg&quot; x=&quot;0&quot; y=&quot;100%&quot; fill=&quot;white&quot; textLength=&quot;30&quot; font-size=&quot;5&quot; font-family=&quot;sans-serif&quot; style=&quot;text-transform:uppercase&quot;>stub</text></svg>",
+			"width": "65px",
+			"height": "13px",
+			"link": "index.html"
+		}
+	},
+	"opts": {
+		"destination": "./docs/",
+		"encoding": "utf8",
+		"private": true,
+		"recurse": true,
+		"template": "./node_modules/tui-jsdoc-template"
+	}
+}
