@@ -1,38 +1,29 @@
-# Stub
+# css-patch
 
-[![npm version](https://img.shields.io/npm/v/stub?style=for-the-badge)](https://www.npmjs.com/package/stub)![node version](https://img.shields.io/node/v/stub?style=for-the-badge)[![Build status - Linux/OSX](https://img.shields.io/travis/com/Zekfad/stub?style=for-the-badge&logo=linux&logoColor=white)](https://travis-ci.com/github/Zekfad/stub)[![Build status - Windows](https://img.shields.io/appveyor/build/Zekfad/stub?style=for-the-badge&logo=windows&logoColor=white)](https://ci.appveyor.com/project/Zekfad/stub)[![Codecov](https://img.shields.io/codecov/c/gh/Zekfad/stub?style=for-the-badge)](https://codecov.io/gh/Zekfad/stub)
+[![npm version](https://img.shields.io/npm/v/css-patch?style=for-the-badge)](https://www.npmjs.com/package/css-patch)![node version](https://img.shields.io/node/v/css-patch?style=for-the-badge)[![Build status - Linux/OSX](https://img.shields.io/travis/com/Zekfad/css-patch?style=for-the-badge&logo=linux&logoColor=white)](https://travis-ci.com/github/Zekfad/css-patch)[![Build status - Windows](https://img.shields.io/appveyor/build/Zekfad/css-patch?style=for-the-badge&logo=windows&logoColor=white)](https://ci.appveyor.com/project/Zekfad/css-patch)[![Codecov](https://img.shields.io/codecov/c/gh/Zekfad/css-patch?style=for-the-badge)](https://codecov.io/gh/Zekfad/css-patch)
 
 
-Stub module.
+css-patch module.
 
 ## Features
-
-Features presented in this stub:
-
-* ESLint.
-* Babel.
-* Terser.
-* ESM and CommonJS input and output.
-* TypeScript declarations generation.
-* Docs generation.
 
 ## Install
 
 Install via yarn:
 
 ```
-yarn add stub
+yarn add css-patch
 ```
 
 Install via npm:
 
 ```
-npm i stub
+npm i css-patch
 ```
 
 ## Docs
 
-[Read the docs on GitHub pages.](https://zekfad.github.io/stub/)
+[Read the docs on GitHub pages.](https://zekfad.github.io/css-patch/)
 
 ## Example
 
@@ -41,17 +32,22 @@ npm i stub
 #### CommonJS
 
 ```js
-const { stub, } = require('stub');
+const { generateCSSPatch, } = require('css-patch');
 ```
 
 #### ES6
 
 ```js
-import { stub, } from 'stub';
+import { generateCSSPatch, } from 'css-patch';
 ```
 
 ### Use
 
 ```js
-console.log(stub(false)); // 'bar'
+console.log(
+	generateCSSPatch(
+		'a{a:1;b:1;}b{b:1;}c{a:1;}d{a:1;}',
+		'a{a:1;}b{b:2;}c{a:1;}'
+	)
+); // 'a{b:unset;}b{b:2;}d{a:unset;}'
 ```

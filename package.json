@@ -9,18 +9,18 @@
 		}
 	},
 	"module": "./dist/esm/bundle.js",
-	"name": "stub",
+	"name": "css-patch",
 	"version": "1.0.0",
-	"description": "Description.",
+	"description": "CSS patch generator.",
 	"keywords": [],
-	"homepage": "https://github.com/Zekfad/stub",
+	"homepage": "https://github.com/Zekfad/css-patch",
 	"bugs": {
-		"url": "https://github.com/Zekfad/stub/issues",
+		"url": "https://github.com/Zekfad/css-patch/issues",
 		"email": "zekfad@znnme.eu.org"
 	},
 	"license": "ISC",
 	"author": "Zekfad <zekfad@znnme.eu.org> (https://zekfad.znnme.eu.org)",
-	"repository": "github:Zekfad/stub",
+	"repository": "github:Zekfad/css-patch",
 	"types": "types/index.d.ts",
 	"scripts": {
 		"lint": "eslint . --ext .js,.cjs,.mjs",
