@@ -36,7 +36,7 @@
         <ul></ul>
     </div>
     
-    <div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#stub">stub</a></li></ul></div>
+    <div class="lnb-api hidden"><h3><a href="global.html">Global</a></h3></div>
 </nav>
 <div id="resizer"></div>
 
@@ -72,47 +72,55 @@
     
 
     
-        <h3 class="subsection-title">Methods</h3>
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
 
         <dl>
                 
 
 <dt>
+<h4 class="name" id="ASTNode">
+    ASTNode
     
-        <h4 class="name" id="stub">
-            
-                <span class="type-signature"></span>stub<span class="signature">(foo<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span>
-                
-            
-            <div class="container-source members">
-                <code><a href="stub.js.html">stub.js</a></code>,
-                <code><a href="stub.js.html#line6">line 6</a></code>
-            </div>
-            
-        </h4>
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line43">line 43</a></code>
+    </div>
+    
+</h4>
 
-        
-    
+
 </dt>
 <dd>
-
     
     <div class="description">
-        <p>Get <code>'foo'</code> or <code>'bar'</code>.</p>
+        <p>AST Node common interface.</p>
     </div>
     
 
+    <!--
     
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
 
     
 
-    
+
+    <h5 class="subsection-title">Properties:</h5>
 
     
-    <div class="container-params">
-        <h5>Parameters:</h5>
-        
-<table class="params">
+
+<table class="props">
     <thead>
     <tr>
         
@@ -122,11 +130,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -138,46 +142,213 @@
 
         <tr>
             
-                <td class="name"><code>foo</code></td>
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">boolean</span>
+<span class="param-type">string</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
 
-                
+            
 
+            <td class="description last"><p>CSS value.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
                 
-                </td>
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
             
 
             
-                <td class="default">
-                
-                    false
-                
-                </td>
+
+            <td class="description last"><p>Node type.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
             
 
-            <td class="description last"><p>Whatever to return <code>'foo'</code> instead of <code>'bar'</code>.</p></td>
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node properties.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>children</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node children.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>root</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ASTNode">ASTNode</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node's root node.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ASTNode">ASTNode</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node's parent node.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>line</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node line in CSS file.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>column</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node column in CSS file.</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
-    </div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -191,27 +362,57 @@
     
 
     
-    <div class="container-returns">
-        <h5>Returns:</h5>
-        
-                
+
+    
+
+    
+</dl>
 
 
+    
 
-<span class="param-type">string</span>
-
-
-
-
-
-- <p><code>'foo'</code> or <code>'bar'</code>.</p>
-
-
-
+    
+</dd>
 
             
+                
+
+<dt>
+<h4 class="name" id="AtRule">
+    AtRule
+    
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line1">line 1</a></code>
     </div>
     
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>At (<code>@</code>) rule set.</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#ASTNode">ASTNode</a></span>
+|
+
+<span class="param-type"><a href="global.html#AtRuleBase">AtRuleBase</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
 
     
 
@@ -252,11 +453,905 @@
 
     
 
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="AtRuleBase">
+    AtRuleBase
+    
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line5">line 5</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Rule node type.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Rule parts (e.g. keyframes name or media queries).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="Comment">
+    Comment
+    
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line21">line 21</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Comment.</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#ASTNode">ASTNode</a></span>
+|
+
+<span class="param-type"><a href="global.html#CommentBase">CommentBase</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="CommentBase">
+    CommentBase
+    
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line25">line 25</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">"comm"</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Comment node type.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">"n"</span>
+|
+
+<span class="param-type">"/"</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Comment type: <code>'\n'</code> - double slash comment. <code>'/'</code> - Multiline comment.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>children</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Comment value.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="Declaration">
+    Declaration
+    
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line32">line 32</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Declaration.</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#ASTNode">ASTNode</a></span>
+|
+
+<span class="param-type"><a href="global.html#DeclarationBase">DeclarationBase</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="DeclarationBase">
+    DeclarationBase
+    
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line36">line 36</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">"decl"</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Declaration node type.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Declaration key.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>children</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Declaration value.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="Rule">
+    Rule
+    
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line11">line 11</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Rule set.</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#ASTNode">ASTNode</a></span>
+|
+
+<span class="param-type"><a href="global.html#RuleBase">RuleBase</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+            
+                
+
+<dt>
+<h4 class="name" id="RuleBase">
+    RuleBase
+    
+    <div class="container-source members">
+        <code><a href="CSSTransformer.js.html">CSSTransformer.js</a></code>,
+        <code><a href="CSSTransformer.js.html#line15">line 15</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">"rule"</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Rule node type.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Rule selectors.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
 </dd>
 
             </dl>
-    
-
     
 
     

@@ -1,6 +1,6 @@
-import stub from './stub';
+import generateCSSPatch from './generateCSSPatch';
 
 
 export {
-	stub,
+	generateCSSPatch,
 };

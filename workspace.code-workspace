@@ -14,17 +14,18 @@
 			"**/dist/": false
 		},
 		"cSpell.words": [
-			"zekfad",
-			"Yaroslav",
+			"LOCALAPPDATA",
 			"Vorobev",
-			"npm",
-			"yarn",
-			"fnames",
-			"typeofs",
-			"lcov",
+			"Yaroslav",
 			"codecov",
 			"collapsibles",
-			"LOCALAPPDATA"
+			"fnames",
+			"lcov",
+			"npm",
+			"stylis",
+			"typeofs",
+			"yarn",
+			"zekfad"
 		],
 	}
 }

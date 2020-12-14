@@ -1,2 +1,2 @@
-export { stub };
-import stub from "./stub";
+export { generateCSSPatch };
+import generateCSSPatch from "./generateCSSPatch";

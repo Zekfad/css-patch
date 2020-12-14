@@ -22,6 +22,7 @@ plugins.push(...[
 	babel({
 		exclude     : 'node_modules/**',
 		babelHelpers: 'bundled',
+		plugins     : [ '@babel/plugin-proposal-class-properties', ],
 		presets     : [
 			[
 				'@babel/preset-env',
@@ -74,5 +75,9 @@ export default {
 		},
 	],
 	plugins,
-	external: [ ...builtin, ],
+	external: [
+		...builtin,
+		'stylis',
+		'deep-object-diff',
+	],
 };
