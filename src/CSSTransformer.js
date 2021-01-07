@@ -71,6 +71,9 @@ class CSSTransformer {
 			{ typesMap: types, } = this,
 			{ type, } = el;
 
+		if (!type)
+			return null;
+
 		return types[type] ?? (type.startsWith('@')
 			? types['@']
 			: null);
