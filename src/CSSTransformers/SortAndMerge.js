@@ -15,6 +15,60 @@ class SortAndMerge extends CSSTransformer {
 	constructor() {
 		super();
 		this.rulesMaps = new WeakMap();
+		this.rootsMaps = new WeakMap();
+	}
+
+	/**
+	 * Root node transformer.
+	 * @param {Rule[]}     el             Root element.
+	 * @param {?number}    i              Root element index if any.
+	 * @param {?ASTNode[]} parentChildren Children of root element parent if there is any parent.
+	 * @param {?Function}  cb             Callback.
+	 */
+	root(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		let rootAnchor = Object.create(null);
+
+		el.forEach(child => {
+			if ('object' !== typeof (child.parent ?? void 0))
+				child.parent = rootAnchor;
+			else
+				rootAnchor = child.parent;
+		});
+
+		this.transformSubElements(el);
+
+		const
+			{ rootsMaps, } = this,
+			root = rootsMaps.get(rootAnchor),
+			rules = 'object' === typeof root
+				? Object.keys(root)
+				: [];
+
+		let _i = 0;
+
+		el.forEach((child, childIndex, _el) => {
+			if ('rule' === getType(child)) {
+				if (rules[_i]) {
+					_el[childIndex] = root[rules[_i]];
+					_i++;
+					return true;
+				}
+				_el.splice(childIndex, 1);
+				return false;
+			}
+			return true;
+		});
+	}
+
+	/**
+	 * Declaration transformer.
+	 * @param {AtRule}    el             Element.
+	 * @param {number}    i              Element index.
+	 * @param {ASTNode[]} parentChildren Element's parent children list.
+	 * @param {?Function} cb             Callback.
+	 */
+	atRule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		this.root(el.children, i, parentChildren, cb);
 	}
 
 	/**
@@ -25,14 +79,34 @@ class SortAndMerge extends CSSTransformer {
 	 * @param {?Function} cb             Callback.
 	 */
 	rule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
-		el.children.forEach((child, _i, _children) => {
-			return this.getTransformer(child)(child, _i, _children);
-		});
+		const
+			{ rootsMaps, } = this,
+			{ parent, } = el;
+
+		if (!rootsMaps.has(parent))
+			rootsMaps.set(parent, {});
+
+		const root = rootsMaps.get(parent);
+
+		if (root[el.props])
+			root[el.props].children.forEach(child => {
+				child.parent = el;
+				el.children.push(child);
+			});
+
+		root[el.props] = el;
+
+		this.transformSubElements(el.children);
+
 		const
 			{ rulesMaps, } = this,
 			rule = rulesMaps.get(el),
-			declarations = Object.keys(rule).sort();
+			declarations = 'object' === typeof rule
+				? Object.keys(rule).sort()
+				: [];
+
 		let _i = 0;
+
 		el.children = el.children.filter(child => {
 			if ('declaration' === getType(child)) {
 				if (declarations[_i]) {

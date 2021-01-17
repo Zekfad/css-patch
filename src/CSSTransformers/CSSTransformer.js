@@ -9,7 +9,7 @@ import getType from './getType';
 class CSSTransformer {
 	/**
 	 * Transform AST with this transformer.
-	 * @param   {ASTNode} el Element.
+	 * @param   {ASTNode | ASTNode[]} el Element.
 	 */
 	static transform(el) {
 		return new this().getTransformer(el)(el);
@@ -22,12 +22,36 @@ class CSSTransformer {
 	constructor() {}
 
 	/**
+	 * Transform all sub elements.
+	 * @param {ASTNode[]} elements Array of elements.
+	 */
+	transformSubElements(elements) {
+		return elements.forEach((child, _i, _children) =>
+			this.getTransformer(child)(child, _i, _children));
+	}
+
+	/**
 	 * Get node transformer.
 	 * @param   {ASTNode} el Element.
 	 * @returns {Function}   Node transformer.
 	 */
 	getTransformer(el) {
 		return this[getType(el)]?.bind?.(this) ?? null;
+	}
+
+	/**
+	 * Root node transformer.
+	 * @param {Rule[]}     el             Root element.
+	 * @param {?number}    i              Root element index if any.
+	 * @param {?ASTNode[]} parentChildren Children of root element parent if there is any parent.
+	 * @param {?Function}  cb             Callback.
+	 */
+	root(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		const rootAnchor = Object.create(null);
+
+		el.forEach(child => child.parent = rootAnchor);
+
+		return this.transformSubElements(el);
 	}
 
 	/**
@@ -38,9 +62,7 @@ class CSSTransformer {
 	 * @param {?Function} cb             Callback.
 	 */
 	atRule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
-		el.children.forEach((child, _i, _children) =>
-			this.getTransformer(child)(child, _i, _children));
-		return;
+		return this.transformSubElements(el.children);
 	}
 
 	/**
@@ -51,9 +73,7 @@ class CSSTransformer {
 	 * @param {?Function} cb             Callback.
 	 */
 	rule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
-		el.children.forEach((child, _i, _children) =>
-			this.getTransformer(child)(child, _i, _children));
-		return;
+		return this.transformSubElements(el.children);
 	}
 
 	/**

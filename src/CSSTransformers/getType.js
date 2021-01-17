@@ -6,14 +6,18 @@ const typesMap = {
 	rule: 'rule',
 	comm: 'comment',
 	decl: 'declaration',
+	root: 'root',
 };
 
 /**
  * Get node type.
- * @param   {ASTNode} el Element.
- * @returns {?string}    Node transformer name.
+ * @param   {ASTNode|ASTNode[]} el Element.
+ * @returns {?string}              Node transformer name.
  */
 function getType(el) {
+	if (Array.isArray(el))
+		return typesMap.root;
+
 	const { type, } = el;
 
 	if (!type)
