@@ -39,6 +39,7 @@
 		"@rollup/plugin-commonjs": "^17.0.0",
 		"@rollup/plugin-json": "^4.0.2",
 		"@rollup/plugin-node-resolve": "^11.0.1",
+		"@types/diff": "^5.0.0",
 		"@types/stylis": "^4.0.0",
 		"@zekfad/eslint-config": "^1.0.0",
 		"babel-eslint": "^10.1.0",
@@ -59,7 +60,7 @@
 		"node": ">=10"
 	},
 	"dependencies": {
-		"deep-object-diff": "^1.1.0",
+		"diff": "^5.0.0",
 		"stylis": "^4.0.6"
 	}
 }
