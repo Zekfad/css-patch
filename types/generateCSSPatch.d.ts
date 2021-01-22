@@ -1,2 +1,6 @@
 export default generateCSSPatch;
-declare function generateCSSPatch(original: any, expected: any): any;
+/**
+ * @param {string} original
+ * @param {string} expected
+ */
+declare function generateCSSPatch(original: string, expected: string): string;

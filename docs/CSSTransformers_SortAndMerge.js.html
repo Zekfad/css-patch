@@ -1,8 +1,10 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home | stub</title>
+    <title>Source: CSSTransformers/SortAndMerge.js | stub</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -46,51 +48,159 @@
 
 
     
-
-
-
-
-
-
-
-
-
-    
-
-
     <section>
-        <article class="readme"><h1>css-patch</h1>
-<p><a href="https://www.npmjs.com/package/css-patch"><img src="https://img.shields.io/npm/v/css-patch?style=for-the-badge" alt="npm version"></a><img src="https://img.shields.io/node/v/css-patch?style=for-the-badge" alt="node version"><a href="https://travis-ci.com/github/Zekfad/css-patch"><img src="https://img.shields.io/travis/com/Zekfad/css-patch?style=for-the-badge&amp;logo=linux&amp;logoColor=white" alt="Build status - Linux/OSX"></a><a href="https://ci.appveyor.com/project/Zekfad/css-patch"><img src="https://img.shields.io/appveyor/build/Zekfad/css-patch?style=for-the-badge&amp;logo=windows&amp;logoColor=white" alt="Build status - Windows"></a><a href="https://codecov.io/gh/Zekfad/css-patch"><img src="https://img.shields.io/codecov/c/gh/Zekfad/css-patch?style=for-the-badge" alt="Codecov"></a></p>
-<p>css-patch module.</p>
-<h2>Features</h2>
-<h2>Install</h2>
-<p>Install via yarn:</p>
-<pre class="prettyprint source"><code>yarn add css-patch
+        <article>
+            <pre class="prettyprint source linenums"><code>import './ASTTypeDefs';
+import CSSTransformer from './CSSTransformer';
+import getType from './getType';
+
+
+/**
+ * Merge duplicate declarations. Last appeared would be used for value.
+ * In order to apply this transformer use static `SortAndMerge.transform(el)`.
+ */
+class SortAndMerge extends CSSTransformer {
+	/**
+	 * This is internal state initializer.
+	 * Use static `SortAndMerge.transform(el)` method instead.
+	 */
+	constructor() {
+		super();
+		this.rulesMaps = new WeakMap();
+		this.rootsMaps = new WeakMap();
+	}
+
+	/**
+	 * Root node transformer.
+	 * @param {Rule[]}     el             Root element.
+	 * @param {?number}    i              Root element index if any.
+	 * @param {?ASTNode[]} parentChildren Children of root element parent if there is any parent.
+	 * @param {?Function}  cb             Callback.
+	 */
+	root(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		let rootAnchor = Object.create(null);
+
+		el.forEach(child => {
+			if ('object' !== typeof (child.parent ?? void 0))
+				child.parent = rootAnchor;
+			else
+				rootAnchor = child.parent;
+		});
+
+		this.transformSubElements(el);
+
+		const
+			{ rootsMaps, } = this,
+			root = rootsMaps.get(rootAnchor),
+			rules = 'object' === typeof root
+				? Object.keys(root)
+				: [];
+
+		let _i = 0;
+
+		el.forEach((child, childIndex, _el) => {
+			if ('rule' === getType(child)) {
+				if (rules[_i]) {
+					_el[childIndex] = root[rules[_i]];
+					_i++;
+					return true;
+				}
+				_el.splice(childIndex, 1);
+				return false;
+			}
+			return true;
+		});
+	}
+
+	/**
+	 * Declaration transformer.
+	 * @param {AtRule}    el             Element.
+	 * @param {number}    i              Element index.
+	 * @param {ASTNode[]} parentChildren Element's parent children list.
+	 * @param {?Function} cb             Callback.
+	 */
+	atRule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		this.root(el.children, i, parentChildren, cb);
+	}
+
+	/**
+	 * Declaration transformer.
+	 * @param {Rule}      el             Element.
+	 * @param {number}    i              Element index.
+	 * @param {ASTNode[]} parentChildren Element's parent children list.
+	 * @param {?Function} cb             Callback.
+	 */
+	rule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		const
+			{ rootsMaps, } = this,
+			{ parent, } = el;
+
+		if (!rootsMaps.has(parent))
+			rootsMaps.set(parent, {});
+
+		const root = rootsMaps.get(parent);
+
+		if (root[el.props])
+			root[el.props].children.forEach(child => {
+				child.parent = el;
+				el.children.push(child);
+			});
+
+		root[el.props] = el;
+
+		this.transformSubElements(el.children);
+
+		const
+			{ rulesMaps, } = this,
+			rule = rulesMaps.get(el),
+			declarations = 'object' === typeof rule
+				? Object.keys(rule).sort()
+				: [];
+
+		let _i = 0;
+
+		el.children = el.children.filter(child => {
+			if ('declaration' === getType(child)) {
+				if (declarations[_i]) {
+					child.props = declarations[_i];
+					child.children = rule[declarations[_i]];
+					child.value = `${child.props}:${child.children};`;
+					_i++;
+					return true;
+				}
+				return false;
+			}
+			return true;
+		});
+
+		return;
+	}
+	/**
+	 * Declaration transformer.
+	 * @param {Declaration} el             Element.
+	 * @param {number}      i              Element index.
+	 * @param {ASTNode[]}   parentChildren Element's parent children list.
+	 * @param {?Function}   cb             Callback.
+	 */
+	declaration(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		const
+			{ rulesMaps, } = this,
+			{ parent, } = el;
+
+		if (!rulesMaps.has(parent))
+			rulesMaps.set(parent, {});
+
+		const rule = rulesMaps.get(parent);
+
+		rule[el.props] = el.children;
+		return;
+	}
+}
+
+export default SortAndMerge;
 </code></pre>
-<p>Install via npm:</p>
-<pre class="prettyprint source"><code>npm i css-patch
-</code></pre>
-<h2>Docs</h2>
-<p><a href="https://zekfad.github.io/css-patch/">Read the docs on GitHub pages.</a></p>
-<h2>Example</h2>
-<h3>Import</h3>
-<h4>CommonJS</h4>
-<pre class="prettyprint source lang-js"><code>const { generateCSSPatch, } = require('css-patch');
-</code></pre>
-<h4>ES6</h4>
-<pre class="prettyprint source lang-js"><code>import { generateCSSPatch, } from 'css-patch';
-</code></pre>
-<h3>Use</h3>
-<pre class="prettyprint source lang-js"><code>console.log(
-	generateCSSPatch(
-		'a{a:1;b:1;}b{b:1;}c{a:1;}d{a:1;}',
-		'a{a:1;}b{b:2;}c{a:1;}'
-	)
-); // 'a{b:unset;}b{b:2;}d{a:unset;}'
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 
@@ -107,7 +217,7 @@
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        var id = 'package:css-patch_sub'.replace(/"/g, '_');
+        var id = '_sub'.replace(/"/g, '_');
         var selectedApi = document.getElementById(id); // do not use jquery selector
         var $selectedApi = $(selectedApi);
 

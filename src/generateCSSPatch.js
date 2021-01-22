@@ -35,8 +35,8 @@ function getRulesSelectors(rules) {
 
 /**
  * Get numeric state of a diff part.
- * @param {Diff.ArrayChange<any>} diffPart Diff part.
- * @returns {-1 | 0 | 1}
+ * @param {Diff.ArrayChange.<any>} diffPart Diff part.
+ * @returns {number}
  */
 function getDiffPartState(diffPart) {
 	return diffPart.added
@@ -52,7 +52,7 @@ function getDiffPartState(diffPart) {
  * @param {Rule[]} expected Expected rules set.
  */
 function diffRules(original, expected) {
-	/** @type {Diff.ArrayChange<string>[]} */
+	/** @type {Array.<Diff.ArrayChange.<string>>} */
 	const diff = diffArrays(
 			...[ original, expected, ].map(
 				selectors => getRulesSelectors(selectors).sort()
@@ -106,7 +106,7 @@ function diffDeclarations(originalRule, expectedRule) {
 		)
 	);
 
-	/** @type {Diff.ArrayChange<string>[]} */
+	/** @type {Array.<Diff.ArrayChange<string>>} */
 	const diff = diffArrays( // eslint-disable-line one-var
 			...[ original, expected, ].map(
 				declarations => declarations.map(

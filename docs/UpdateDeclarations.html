@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home | stub</title>
+    <title>Class: UpdateDeclarations | stub</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -45,52 +45,380 @@
 
 
 
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>UpdateDeclarations<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Update all declarations.</p></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dt>
+    
+        <h4 class="name" id="UpdateDeclarations">
+            
+                new <span class="type-signature"></span>UpdateDeclarations<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_UpdateDeclarations.js.html">CSSTransformers/UpdateDeclarations.js</a></code>,
+                <code><a href="CSSTransformers_UpdateDeclarations.js.html#line8">line 8</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
 
+<dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
     
 
+</dd>
 
-    <section>
-        <article class="readme"><h1>css-patch</h1>
-<p><a href="https://www.npmjs.com/package/css-patch"><img src="https://img.shields.io/npm/v/css-patch?style=for-the-badge" alt="npm version"></a><img src="https://img.shields.io/node/v/css-patch?style=for-the-badge" alt="node version"><a href="https://travis-ci.com/github/Zekfad/css-patch"><img src="https://img.shields.io/travis/com/Zekfad/css-patch?style=for-the-badge&amp;logo=linux&amp;logoColor=white" alt="Build status - Linux/OSX"></a><a href="https://ci.appveyor.com/project/Zekfad/css-patch"><img src="https://img.shields.io/appveyor/build/Zekfad/css-patch?style=for-the-badge&amp;logo=windows&amp;logoColor=white" alt="Build status - Windows"></a><a href="https://codecov.io/gh/Zekfad/css-patch"><img src="https://img.shields.io/codecov/c/gh/Zekfad/css-patch?style=for-the-badge" alt="Codecov"></a></p>
-<p>css-patch module.</p>
-<h2>Features</h2>
-<h2>Install</h2>
-<p>Install via yarn:</p>
-<pre class="prettyprint source"><code>yarn add css-patch
-</code></pre>
-<p>Install via npm:</p>
-<pre class="prettyprint source"><code>npm i css-patch
-</code></pre>
-<h2>Docs</h2>
-<p><a href="https://zekfad.github.io/css-patch/">Read the docs on GitHub pages.</a></p>
-<h2>Example</h2>
-<h3>Import</h3>
-<h4>CommonJS</h4>
-<pre class="prettyprint source lang-js"><code>const { generateCSSPatch, } = require('css-patch');
-</code></pre>
-<h4>ES6</h4>
-<pre class="prettyprint source lang-js"><code>import { generateCSSPatch, } from 'css-patch';
-</code></pre>
-<h3>Use</h3>
-<pre class="prettyprint source lang-js"><code>console.log(
-	generateCSSPatch(
-		'a{a:1;b:1;}b{b:1;}c{a:1;}d{a:1;}',
-		'a{a:1;}b{b:2;}c{a:1;}'
-	)
-); // 'a{b:unset;}b{b:2;}d{a:unset;}'
-</code></pre></article>
-    </section>
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+                
+
+<dt>
+    
+        <h4 class="name" id="declaration">
+            
+                <span class="type-signature"></span>declaration<span class="signature">(el, i, children, cb<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_UpdateDeclarations.js.html">CSSTransformers/UpdateDeclarations.js</a></code>,
+                <code><a href="CSSTransformers_UpdateDeclarations.js.html#line16">line 16</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Declaration transformer.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Declaration">Declaration</a></span>
 
 
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element index.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>children</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element's parent children list.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Callback.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
@@ -107,7 +435,7 @@
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        var id = 'package:css-patch_sub'.replace(/"/g, '_');
+        var id = 'UpdateDeclarations_sub'.replace(/"/g, '_');
         var selectedApi = document.getElementById(id); // do not use jquery selector
         var $selectedApi = $(selectedApi);
 

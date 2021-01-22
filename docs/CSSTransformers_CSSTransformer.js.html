@@ -1,8 +1,10 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home | stub</title>
+    <title>Source: CSSTransformers/CSSTransformer.js | stub</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -46,51 +48,113 @@
 
 
     
-
-
-
-
-
-
-
-
-
-    
-
-
     <section>
-        <article class="readme"><h1>css-patch</h1>
-<p><a href="https://www.npmjs.com/package/css-patch"><img src="https://img.shields.io/npm/v/css-patch?style=for-the-badge" alt="npm version"></a><img src="https://img.shields.io/node/v/css-patch?style=for-the-badge" alt="node version"><a href="https://travis-ci.com/github/Zekfad/css-patch"><img src="https://img.shields.io/travis/com/Zekfad/css-patch?style=for-the-badge&amp;logo=linux&amp;logoColor=white" alt="Build status - Linux/OSX"></a><a href="https://ci.appveyor.com/project/Zekfad/css-patch"><img src="https://img.shields.io/appveyor/build/Zekfad/css-patch?style=for-the-badge&amp;logo=windows&amp;logoColor=white" alt="Build status - Windows"></a><a href="https://codecov.io/gh/Zekfad/css-patch"><img src="https://img.shields.io/codecov/c/gh/Zekfad/css-patch?style=for-the-badge" alt="Codecov"></a></p>
-<p>css-patch module.</p>
-<h2>Features</h2>
-<h2>Install</h2>
-<p>Install via yarn:</p>
-<pre class="prettyprint source"><code>yarn add css-patch
+        <article>
+            <pre class="prettyprint source linenums"><code>import './ASTTypeDefs';
+import getType from './getType';
+
+
+/**
+ * CSS AST transformer.
+ * In order to apply this transformer use static `CSSTransformer.transform(el)`.
+ */
+class CSSTransformer {
+	/**
+	 * Transform AST with this transformer.
+	 * @param   {ASTNode | ASTNode[]} el Element.
+	 */
+	static transform(el) {
+		return new this().getTransformer(el)(el);
+	}
+
+	/**
+	 * This is internal state initializer.
+	 * Use static `CSSTransformer.transform(el)` method instead.
+	 */
+	constructor() {}
+
+	/**
+	 * Transform all sub elements.
+	 * @param {ASTNode[]} elements Array of elements.
+	 */
+	transformSubElements(elements) {
+		return elements.forEach((child, _i, _children) =>
+			this.getTransformer(child)(child, _i, _children));
+	}
+
+	/**
+	 * Get node transformer.
+	 * @param   {ASTNode} el Element.
+	 * @returns {Function}   Node transformer.
+	 */
+	getTransformer(el) {
+		return this[getType(el)]?.bind?.(this) ?? null;
+	}
+
+	/**
+	 * Root node transformer.
+	 * @param {Rule[]}     el             Root element.
+	 * @param {?number}    i              Root element index if any.
+	 * @param {?ASTNode[]} parentChildren Children of root element parent if there is any parent.
+	 * @param {?Function}  cb             Callback.
+	 */
+	root(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		const rootAnchor = Object.create(null);
+
+		el.forEach(child => child.parent = rootAnchor);
+
+		return this.transformSubElements(el);
+	}
+
+	/**
+	 * Declaration transformer.
+	 * @param {AtRule}    el             Element.
+	 * @param {number}    i              Element index.
+	 * @param {ASTNode[]} parentChildren Element's parent children list.
+	 * @param {?Function} cb             Callback.
+	 */
+	atRule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		return this.transformSubElements(el.children);
+	}
+
+	/**
+	 * Declaration transformer.
+	 * @param {Rule}      el             Element.
+	 * @param {number}    i              Element index.
+	 * @param {ASTNode[]} parentChildren Element's parent children list.
+	 * @param {?Function} cb             Callback.
+	 */
+	rule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		return this.transformSubElements(el.children);
+	}
+
+	/**
+	 * Declaration transformer.
+	 * @param {Declaration} el             Element.
+	 * @param {number}      i              Element index.
+	 * @param {ASTNode[]}   parentChildren Element's parent children list.
+	 * @param {?Function}   cb             Callback.
+	 */
+	declaration(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		return;
+	}
+
+	/**
+	 * Declaration transformer.
+	 * @param {Comment}   el             Element.
+	 * @param {number}    i              Element index.
+	 * @param {ASTNode[]} parentChildren Element's parent children list.
+	 * @param {?Function} cb             Callback.
+	 */
+	comment(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		return;
+	}
+}
+
+export default CSSTransformer;
 </code></pre>
-<p>Install via npm:</p>
-<pre class="prettyprint source"><code>npm i css-patch
-</code></pre>
-<h2>Docs</h2>
-<p><a href="https://zekfad.github.io/css-patch/">Read the docs on GitHub pages.</a></p>
-<h2>Example</h2>
-<h3>Import</h3>
-<h4>CommonJS</h4>
-<pre class="prettyprint source lang-js"><code>const { generateCSSPatch, } = require('css-patch');
-</code></pre>
-<h4>ES6</h4>
-<pre class="prettyprint source lang-js"><code>import { generateCSSPatch, } from 'css-patch';
-</code></pre>
-<h3>Use</h3>
-<pre class="prettyprint source lang-js"><code>console.log(
-	generateCSSPatch(
-		'a{a:1;b:1;}b{b:1;}c{a:1;}d{a:1;}',
-		'a{a:1;}b{b:2;}c{a:1;}'
-	)
-); // 'a{b:unset;}b{b:2;}d{a:unset;}'
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 
@@ -107,7 +171,7 @@
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        var id = 'package:css-patch_sub'.replace(/"/g, '_');
+        var id = '_sub'.replace(/"/g, '_');
         var selectedApi = document.getElementById(id); // do not use jquery selector
         var $selectedApi = $(selectedApi);
 

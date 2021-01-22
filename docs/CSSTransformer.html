@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Class: CSSTransformer | stub</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 65px; height: 13px">
+        
+            <a href="index.html" rel="noopener noreferrer" target="_blank">
+                <img src="data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 30 5&quot;><text xmlns=&quot;http://www.w3.org/2000/svg&quot; x=&quot;0&quot; y=&quot;100%&quot; fill=&quot;white&quot; textLength=&quot;30&quot; font-size=&quot;5&quot; font-family=&quot;sans-serif&quot; style=&quot;text-transform:uppercase&quot;>stub</text></svg>" width="100%" height="100%">
+            </a>
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">stub</a></h1>
+        
+            <span class="version">v1.0.0</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="CSSTransformer.html">CSSTransformer</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="CSSTransformer_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="CSSTransformer.html#.transform">transform</a></li><li><a href="CSSTransformer.html#atRule">atRule</a></li><li><a href="CSSTransformer.html#comment">comment</a></li><li><a href="CSSTransformer.html#declaration">declaration</a></li><li><a href="CSSTransformer.html#getTransformer">getTransformer</a></li><li><a href="CSSTransformer.html#root">root</a></li><li><a href="CSSTransformer.html#rule">rule</a></li><li><a href="CSSTransformer.html#transformSubElements">transformSubElements</a></li></ul></div></li><li><a href="SortAndMerge.html">SortAndMerge</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="SortAndMerge_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="SortAndMerge.html#atRule">atRule</a></li><li><a href="SortAndMerge.html#declaration">declaration</a></li><li><a href="SortAndMerge.html#root">root</a></li><li><a href="SortAndMerge.html#rule">rule</a></li></ul></div></li><li><a href="Unset.html">Unset</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Unset_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Unset.html#declaration">declaration</a></li></ul></div></li><li><a href="UpdateDeclarations.html">UpdateDeclarations</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="UpdateDeclarations_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="UpdateDeclarations.html#declaration">declaration</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li class="hidden"><a href="global.html#ASTNode">ASTNode</a></li><li class="hidden"><a href="global.html#AtRule">AtRule</a></li><li class="hidden"><a href="global.html#AtRuleBase">AtRuleBase</a></li><li class="hidden"><a href="global.html#Comment">Comment</a></li><li class="hidden"><a href="global.html#CommentBase">CommentBase</a></li><li class="hidden"><a href="global.html#Declaration">Declaration</a></li><li class="hidden"><a href="global.html#DeclarationBase">DeclarationBase</a></li><li><a href="global.html#diffDeclarations">diffDeclarations</a></li><li><a href="global.html#diffRules">diffRules</a></li><li><a href="global.html#findDeclarationByKey">findDeclarationByKey</a></li><li><a href="global.html#findRuleBySelector">findRuleBySelector</a></li><li><a href="global.html#generateCSSPatch">generateCSSPatch</a></li><li><a href="global.html#getDiffPartState">getDiffPartState</a></li><li><a href="global.html#getRulesSelectors">getRulesSelectors</a></li><li><a href="global.html#getType">getType</a></li><li><a href="global.html#normalize">normalize</a></li><li class="hidden"><a href="global.html#Rule">Rule</a></li><li class="hidden"><a href="global.html#RuleBase">RuleBase</a></li><li><a href="global.html#transformDiffRules">transformDiffRules</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>CSSTransformer<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>CSS AST transformer.
+In order to apply this transformer use static <code>CSSTransformer.transform(el)</code>.</p></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dt>
+    
+        <h4 class="name" id="CSSTransformer">
+            
+                new <span class="type-signature"></span>CSSTransformer<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line9">line 9</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>This is internal state initializer.
+Use static <code>CSSTransformer.transform(el)</code> method instead.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+                
+
+<dt>
+    
+        <h4 class="name" id=".transform">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>transform<span class="signature">(el)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line14">line 14</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Transform AST with this transformer.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ASTNode">ASTNode</a></span>
+|
+
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="atRule">
+            
+                <span class="type-signature"></span>atRule<span class="signature">(el, i, parentChildren, cb<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line64">line 64</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Declaration transformer.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#AtRule">AtRule</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element index.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parentChildren</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element's parent children list.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Callback.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="comment">
+            
+                <span class="type-signature"></span>comment<span class="signature">(el, i, parentChildren, cb<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line97">line 97</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Declaration transformer.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Comment">Comment</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element index.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parentChildren</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element's parent children list.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Callback.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="declaration">
+            
+                <span class="type-signature"></span>declaration<span class="signature">(el, i, parentChildren, cb<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line86">line 86</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Declaration transformer.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Declaration">Declaration</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element index.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parentChildren</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element's parent children list.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Callback.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="getTransformer">
+            
+                <span class="type-signature"></span>getTransformer<span class="signature">(el)</span><span class="type-signature"> &rarr; {function}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line38">line 38</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Get node transformer.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ASTNode">ASTNode</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">function</span>
+
+
+
+
+
+- <p>Node transformer.</p>
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="root">
+            
+                <span class="type-signature"></span>root<span class="signature">(el, i<span class="signature-attributes">nullable</span>, parentChildren<span class="signature-attributes">nullable</span>, cb<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line49">line 49</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Root node transformer.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#Rule">Rule</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Root element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Root element index if any.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parentChildren</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Children of root element parent if there is any parent.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Callback.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="rule">
+            
+                <span class="type-signature"></span>rule<span class="signature">(el, i, parentChildren, cb<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line75">line 75</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Declaration transformer.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>el</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Rule">Rule</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element index.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parentChildren</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Element's parent children list.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Callback.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="transformSubElements">
+            
+                <span class="type-signature"></span>transformSubElements<span class="signature">(elements)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="CSSTransformers_CSSTransformer.js.html">CSSTransformers/CSSTransformer.js</a></code>,
+                <code><a href="CSSTransformers_CSSTransformer.js.html#line28">line 28</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Transform all sub elements.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>elements</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#ASTNode">ASTNode</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of elements.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 30 5&quot;><text xmlns=&quot;http://www.w3.org/2000/svg&quot; x=&quot;0&quot; y=&quot;100%&quot; fill=&quot;white&quot; textLength=&quot;30&quot; font-size=&quot;5&quot; font-family=&quot;sans-serif&quot; style=&quot;text-transform:uppercase&quot;>stub</text></svg>" style="width: 65px; height: 13px">
+    <div class="footer-text">stub</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'CSSTransformer_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
