@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Source: CSSTransformers/UpdateDeclarations.js | stub</title>
+    <title>Source: diff/findDeclarationByKey.js | stub</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -50,28 +50,20 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import './ASTTypeDefs';
-import CSSTransformer from './CSSTransformer';
+            <pre class="prettyprint source linenums"><code>import '../CSSTransformers/ASTTypeDefs';
 
 
 /**
- * Update all declarations.
+ * Find declaration object in list of declarations by given key.
+ * @param {string}        selector     Declaration key.
+ * @param {Declaration[]} declarations List of declarations.
+ * @returns {Declaration}
  */
-class UpdateDeclarations extends CSSTransformer {
-	/**
-	 * Declaration transformer.
-	 * @param {Declaration} el       Element.
-	 * @param {number}      i        Element index.
-	 * @param {ASTNode[]}   children Element's parent children list.
-	 * @param {?Function}   cb       Callback.
-	 */
-	declaration(el, i, children, cb) {  // eslint-disable-line no-unused-vars
-		el.value = `${el.props}:${el.children};`;
-		return;
-	}
+function findDeclarationByKey(key, declarations) {
+	return declarations.find(declaration => key === declaration.props);
 }
 
-export default UpdateDeclarations;
+export default findDeclarationByKey;
 </code></pre>
         </article>
     </section>

@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Source: CSSTransformers/UpdateDeclarations.js | stub</title>
+    <title>Source: diff/getRulesSelectors.js | stub</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -50,28 +50,19 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import './ASTTypeDefs';
-import CSSTransformer from './CSSTransformer';
+            <pre class="prettyprint source linenums"><code>import '../CSSTransformers/ASTTypeDefs';
 
 
 /**
- * Update all declarations.
+ * Get all selectors from a rules set.
+ * @param {Rule[]} rules List of rules.
+ * @returns {string[]} Selectors.
  */
-class UpdateDeclarations extends CSSTransformer {
-	/**
-	 * Declaration transformer.
-	 * @param {Declaration} el       Element.
-	 * @param {number}      i        Element index.
-	 * @param {ASTNode[]}   children Element's parent children list.
-	 * @param {?Function}   cb       Callback.
-	 */
-	declaration(el, i, children, cb) {  // eslint-disable-line no-unused-vars
-		el.value = `${el.props}:${el.children};`;
-		return;
-	}
+function getRulesSelectors(rules) {
+	return rules.map(rule => rule.props.join(','));
 }
 
-export default UpdateDeclarations;
+export default getRulesSelectors;
 </code></pre>
         </article>
     </section>

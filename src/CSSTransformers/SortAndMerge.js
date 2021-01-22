@@ -4,6 +4,51 @@ import getType from './getType';
 
 
 /**
+ * Compare values.
+ * @param {any} a Value A.
+ * @param {any} b Value B.
+ * @returns {number}
+ */
+function compareValues(a, b) {
+	return a < b
+		? -1
+		: a > b
+			? 1
+			: 0;
+}
+
+/**
+ * Compare nodes.
+ * Higher means closer to the start.
+ * Sort rule is simple: atRule > rule > anything else.
+ * Same typed nodes are sorted in alphabetic order.
+ * @param {ASTNode} a Node A.
+ * @param {ASTNode} b Node B.
+ * @returns {number}
+ */
+function nodesSorter(a, b) {
+	if ('atRule' !== getType(a) && 'atRule' === getType(b))
+		return 1;
+
+	if ('atRule' === getType(a)) {
+		if ('atRule' === getType(b))
+			return compareValues(a.value, b.value);
+		return -1;
+	}
+
+	if ('rule' !== getType(a) && 'rule' === getType(b))
+		return 1;
+
+	if ('rule' === getType(a)) {
+		if ('rule' === getType(b))
+			return compareValues(a.props.join(','), b.props.join(','));
+		return -1;
+	}
+
+	return 0;
+}
+
+/**
  * Merge duplicate declarations. Last appeared would be used for value.
  * In order to apply this transformer use static `SortAndMerge.transform(el)`.
  */
@@ -62,6 +107,8 @@ class SortAndMerge extends CSSTransformer {
 		droppedItems.forEach(
 			item => el.splice(el.indexOf(item), 1)
 		);
+
+		el.sort(nodesSorter).map((item, i) => el[i] = item);
 	}
 
 	/**
@@ -99,7 +146,7 @@ class SortAndMerge extends CSSTransformer {
 		if (root[id])
 			root[id].children.forEach(child => {
 				child.parent = el;
-				el.children.push(child);
+				el.children.unshift(child);
 			});
 
 		root[id] = el;

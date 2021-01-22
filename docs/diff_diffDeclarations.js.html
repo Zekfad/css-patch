@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Source: CSSTransformers/UpdateDeclarations.js | stub</title>
+    <title>Source: diff/diffDeclarations.js | stub</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -50,28 +50,64 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import './ASTTypeDefs';
-import CSSTransformer from './CSSTransformer';
+            <pre class="prettyprint source linenums"><code>import '../CSSTransformers/ASTTypeDefs';
+
+import { diffArrays, } from 'diff';
+
+import getType from '../CSSTransformers/getType';
+
+import findDeclarationByKey from './findDeclarationByKey';
+import getDiffPartState from './getDiffPartState';
 
 
 /**
- * Update all declarations.
+ * Compare declarations in rules.
+ * @param {Rule} originalRule Original rule.
+ * @param {Rule} expectedRule Expected rule.
  */
-class UpdateDeclarations extends CSSTransformer {
-	/**
-	 * Declaration transformer.
-	 * @param {Declaration} el       Element.
-	 * @param {number}      i        Element index.
-	 * @param {ASTNode[]}   children Element's parent children list.
-	 * @param {?Function}   cb       Callback.
-	 */
-	declaration(el, i, children, cb) {  // eslint-disable-line no-unused-vars
-		el.value = `${el.props}:${el.children};`;
+function diffDeclarations(originalRule, expectedRule) {
+	/** @type {Declaration[][]} */
+	const [ original, expected, ] = [ originalRule, expectedRule, ].map(
+		rule => rule.children.filter(
+			child => 'declaration' === getType(child)
+		)
+	);
+
+	/** @type {Array.&lt;Diff.ArrayChange&lt;string>>} */
+	const diff = diffArrays( // eslint-disable-line one-var
+			...[ original, expected, ].map(
+				declarations => declarations.map(
+					declaration => declaration.props
+				)
+			)
+		),
+		result = [];
+
+	diff.forEach(diffPart => {
+		const state = getDiffPartState(diffPart);
+
+		result.push(
+			...diffPart.value.map(key => ({
+				declaration: 0 !== state
+					? findDeclarationByKey(
+						key,
+						state > 0
+							? expected
+							: original
+					) : {
+						original: findDeclarationByKey(key, original),
+						expected: findDeclarationByKey(key, expected),
+					},
+				state,
+			}))
+		);
 		return;
-	}
+	});
+
+	return result;
 }
 
-export default UpdateDeclarations;
+export default diffDeclarations;
 </code></pre>
         </article>
     </section>

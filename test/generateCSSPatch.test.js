@@ -28,7 +28,17 @@ describe('Package', () => {
 
 		});
 
-		it.skip('should handle at rules', () => {
+		it('should handle at rules', () => {
+
+			assert.strictEqual(
+				generateCSSPatch(
+					'@a{a:1;}@b{a:2;}@a{a{a{a:1;}}}@a{a{a{a1:2;}}}',
+					// @a{a a{a:1;a1:2;}a:1;}@b{a:2;}
+					'@a{a:2;}@c{a:2;}'
+				),
+				'@a{a a{a:unset;a1:unset;}a:2;}@b{a:unset;}@c{a:2;}'
+			);
+
 			assert.strictEqual(
 				generateCSSPatch(
 					'@a{a{a:1}a{b:2}}@b{a{a1:1}a{b1:2}}a{a1:1}a{b1:2}',
@@ -38,7 +48,7 @@ describe('Package', () => {
 					// 'a{b:1;a:2;}a a{a:2;}b{b:1;}c{a:1;}d{a:1;}a a{a:1}}'
 					// 'a{b:1;a:2;}a a{a:1;}b{b:1;}c{a:1;}d{a:1;}}'
 				),
-				'@a{a{a:unset;b:unset;}}@b{a{a1:unset;b1:unset;}}a{a1:unset;b1:unset;a:2;b:1;}a a{a:1;}b{b:1;}c{a:1;}d{a:1;}'
+				'a{a1:unset;b1:unset;a:2;b:1;}a a{a:1;}b{b:1;}c{a:1;}d{a:1;}@a{a{a:unset;b:unset;}}@b{a{a1:unset;b1:unset;}}'
 			);
 		});
 
