@@ -46,18 +46,22 @@ class SortAndMerge extends CSSTransformer {
 
 		let _i = 0;
 
+		const droppedItems = [];
 		el.forEach((child, childIndex, _el) => {
-			if ('rule' === getType(child)) {
+			if ([ 'rule', 'atRule', ].includes(getType(child))) {
 				if (rules[_i]) {
 					_el[childIndex] = root[rules[_i]];
 					_i++;
 					return true;
 				}
-				_el.splice(childIndex, 1);
+				droppedItems.push(child);
 				return false;
 			}
 			return true;
 		});
+		droppedItems.forEach(
+			item => el.splice(el.indexOf(item), 1)
+		);
 	}
 
 	/**
@@ -68,6 +72,7 @@ class SortAndMerge extends CSSTransformer {
 	 * @param {?Function} cb             Callback.
 	 */
 	atRule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
+		this.rule(el, i, parentChildren, cb);
 		this.root(el.children, i, parentChildren, cb);
 	}
 
@@ -81,20 +86,23 @@ class SortAndMerge extends CSSTransformer {
 	rule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
 		const
 			{ rootsMaps, } = this,
-			{ parent, } = el;
+			{ parent, } = el,
+			id = 'atRule' !== getType(el)
+				? el.props
+				: el.value;
 
 		if (!rootsMaps.has(parent))
 			rootsMaps.set(parent, {});
 
 		const root = rootsMaps.get(parent);
 
-		if (root[el.props])
-			root[el.props].children.forEach(child => {
+		if (root[id])
+			root[id].children.forEach(child => {
 				child.parent = el;
 				el.children.push(child);
 			});
 
-		root[el.props] = el;
+		root[id] = el;
 
 		this.transformSubElements(el.children);
 
