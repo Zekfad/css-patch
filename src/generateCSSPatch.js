@@ -183,7 +183,6 @@ function transformDiffRules(original, expected) {
 							} else {
 								originalRule.children.splice(originalRule.children.indexOf(originalDeclaration), 1);
 							}
-							console.log({ originalDeclaration, expectedDeclaration, });
 
 							break;
 						}
