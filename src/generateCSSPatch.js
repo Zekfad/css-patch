@@ -7,8 +7,9 @@ import { transformDiffRules, transformDiffAtRules, } from './diff';
 
 /**
  * Generate CSS difference patch between two CSS stylesheets.
- * @param {string} original
- * @param {string} expected
+ * @param {string} original Original CSS stylesheet.
+ * @param {string} expected Desired CSS stylesheet.
+ * @returns {string} CSS patch difference.
  */
 function generateCSSPatch(original, expected) {
 	const ast = [
