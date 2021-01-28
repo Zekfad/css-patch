@@ -78,6 +78,6 @@ export default {
 	external: [
 		...builtin,
 		'stylis',
-		'deep-object-diff',
+		'diff',
 	],
 };
