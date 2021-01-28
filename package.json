@@ -10,9 +10,14 @@
 	},
 	"module": "./dist/esm/bundle.js",
 	"name": "css-patch",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "CSS patch generator.",
-	"keywords": [],
+	"keywords": [
+		"css",
+		"diff",
+		"patch",
+		"stylesheets"
+	],
 	"homepage": "https://github.com/Zekfad/css-patch",
 	"bugs": {
 		"url": "https://github.com/Zekfad/css-patch/issues",
