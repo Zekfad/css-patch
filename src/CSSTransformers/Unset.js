@@ -1,11 +1,13 @@
-import './ASTTypeDefs';
-import CSSTransformer from './CSSTransformer';
+import '../AST/nodeTypes';
+
+import CSSTransformerBase from './CSSTransformerBase';
 
 
 /**
  * Unset all declarations.
+ * In order to apply this transformer use static `Unset.transform(el)`.
  */
-class Unset extends CSSTransformer {
+class Unset extends CSSTransformerBase {
 	/**
 	 * Declaration transformer.
 	 * @param {Declaration} el       Element.

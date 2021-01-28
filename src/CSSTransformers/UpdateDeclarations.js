@@ -1,11 +1,13 @@
-import './ASTTypeDefs';
-import CSSTransformer from './CSSTransformer';
+import '../AST/nodeTypes';
+
+import CSSTransformerBase from './CSSTransformerBase';
 
 
 /**
  * Update all declarations.
+ * In order to apply this transformer use static `UpdateDeclarations.transform(el)`.
  */
-class UpdateDeclarations extends CSSTransformer {
+class UpdateDeclarations extends CSSTransformerBase {
 	/**
 	 * Declaration transformer.
 	 * @param {Declaration} el       Element.

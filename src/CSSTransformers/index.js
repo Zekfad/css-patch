@@ -1,11 +1,11 @@
-import CSSTransformer from './CSSTransformer';
+import CSSTransformerBase from './CSSTransformerBase';
 import SortAndMerge from './SortAndMerge';
 import Unset from './Unset';
 import UpdateDeclarations from './UpdateDeclarations';
 
 
 export {
-	CSSTransformer,
+	CSSTransformerBase,
 	SortAndMerge,
 	Unset,
 	UpdateDeclarations,

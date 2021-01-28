@@ -1,7 +1,8 @@
 export default Unset;
 /**
  * Unset all declarations.
+ * In order to apply this transformer use static `Unset.transform(el)`.
  */
-declare class Unset extends CSSTransformer {
+declare class Unset extends CSSTransformerBase {
 }
-import CSSTransformer from "./CSSTransformer";
+import CSSTransformerBase from "./CSSTransformerBase";

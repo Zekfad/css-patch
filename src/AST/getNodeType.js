@@ -1,4 +1,4 @@
-import './ASTTypeDefs';
+import './nodeTypes';
 
 
 const typesMap = {
@@ -14,7 +14,7 @@ const typesMap = {
  * @param   {ASTNode|ASTNode[]} el Element.
  * @returns {?string}              Node transformer name.
  */
-function getType(el) {
+function getNodeType(el) {
 	if (Array.isArray(el))
 		return typesMap.root;
 
@@ -28,4 +28,4 @@ function getType(el) {
 		: null);
 }
 
-export default getType;
+export default getNodeType;

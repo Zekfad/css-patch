@@ -1,6 +1,8 @@
-import './ASTTypeDefs';
-import CSSTransformer from './CSSTransformer';
-import getType from './getType';
+import '../AST/nodeTypes';
+
+import { getNodeType, } from '../AST';
+
+import CSSTransformerBase from './CSSTransformerBase';
 
 
 /**
@@ -20,27 +22,27 @@ function compareValues(a, b) {
 /**
  * Compare nodes.
  * Higher means closer to the start.
- * Sort rule is simple: atRule > rule > anything else.
+ * Sorting rule is simple: atRule > rule > anything else.
  * Same typed nodes are sorted in alphabetic order.
  * @param {ASTNode} a Node A.
  * @param {ASTNode} b Node B.
  * @returns {number}
  */
 function nodesSorter(a, b) {
-	if ('atRule' !== getType(a) && 'atRule' === getType(b))
+	if ('atRule' !== getNodeType(a) && 'atRule' === getNodeType(b))
 		return 1;
 
-	if ('atRule' === getType(a)) {
-		if ('atRule' === getType(b))
+	if ('atRule' === getNodeType(a)) {
+		if ('atRule' === getNodeType(b))
 			return compareValues(a.value, b.value);
 		return -1;
 	}
 
-	if ('rule' !== getType(a) && 'rule' === getType(b))
+	if ('rule' !== getNodeType(a) && 'rule' === getNodeType(b))
 		return 1;
 
-	if ('rule' === getType(a)) {
-		if ('rule' === getType(b))
+	if ('rule' === getNodeType(a)) {
+		if ('rule' === getNodeType(b))
 			return compareValues(a.props.join(','), b.props.join(','));
 		return -1;
 	}
@@ -49,10 +51,10 @@ function nodesSorter(a, b) {
 }
 
 /**
- * Merge duplicate declarations. Last appeared would be used for value.
+ * Merge duplicate declarations. For duplicated identifies last one would be used.
  * In order to apply this transformer use static `SortAndMerge.transform(el)`.
  */
-class SortAndMerge extends CSSTransformer {
+class SortAndMerge extends CSSTransformerBase {
 	/**
 	 * This is internal state initializer.
 	 * Use static `SortAndMerge.transform(el)` method instead.
@@ -93,7 +95,7 @@ class SortAndMerge extends CSSTransformer {
 
 		const droppedItems = [];
 		el.forEach((child, childIndex, _el) => {
-			if ([ 'rule', 'atRule', ].includes(getType(child))) {
+			if ([ 'rule', 'atRule', ].includes(getNodeType(child))) {
 				if (rules[_i]) {
 					_el[childIndex] = root[rules[_i]];
 					_i++;
@@ -112,7 +114,7 @@ class SortAndMerge extends CSSTransformer {
 	}
 
 	/**
-	 * Declaration transformer.
+	 * At rule transformer.
 	 * @param {AtRule}    el             Element.
 	 * @param {number}    i              Element index.
 	 * @param {ASTNode[]} parentChildren Element's parent children list.
@@ -124,7 +126,7 @@ class SortAndMerge extends CSSTransformer {
 	}
 
 	/**
-	 * Declaration transformer.
+	 * Rule transformer.
 	 * @param {Rule}      el             Element.
 	 * @param {number}    i              Element index.
 	 * @param {ASTNode[]} parentChildren Element's parent children list.
@@ -134,7 +136,7 @@ class SortAndMerge extends CSSTransformer {
 		const
 			{ rootsMaps, } = this,
 			{ parent, } = el,
-			id = 'atRule' !== getType(el)
+			id = 'atRule' !== getNodeType(el)
 				? el.props
 				: el.value;
 
@@ -163,7 +165,7 @@ class SortAndMerge extends CSSTransformer {
 		let _i = 0;
 
 		el.children = el.children.filter(child => {
-			if ('declaration' === getType(child)) {
+			if ('declaration' === getNodeType(child)) {
 				if (declarations[_i]) {
 					child.props = declarations[_i];
 					child.children = rule[declarations[_i]];

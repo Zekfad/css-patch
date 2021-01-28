@@ -1,7 +1,7 @@
-export default getType;
+export default getNodeType;
 /**
  * Get node type.
  * @param   {ASTNode|ASTNode[]} el Element.
  * @returns {?string}              Node transformer name.
  */
-declare function getType(el: ASTNode | ASTNode[]): string | null;
+declare function getNodeType(el: ASTNode | ASTNode[]): string | null;

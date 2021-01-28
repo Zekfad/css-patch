@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Source: CSSTransformers/SortAndMerge.js | stub</title>
+    <title>Source: diff/transformDiffAtRules.js | stub</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -50,211 +50,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import '../AST/nodeTypes';
+            <pre class="prettyprint source linenums"><code>import { Unset, } from '../CSSTransformers';
 
-import { getNodeType, } from '../AST';
-
-import CSSTransformerBase from './CSSTransformerBase';
-
-
-/**
- * Compare values.
- * @param {any} a Value A.
- * @param {any} b Value B.
- * @returns {number}
- */
-function compareValues(a, b) {
-	return a &lt; b
-		? -1
-		: a > b
-			? 1
-			: 0;
-}
+import diffAtRules from './diffAtRules';
+import transformDiffDeclarations from './transformDiffDeclarations';
+import transformDiffRules from './transformDiffRules';
 
 /**
- * Compare nodes.
- * Higher means closer to the start.
- * Sorting rule is simple: atRule > rule > anything else.
- * Same typed nodes are sorted in alphabetic order.
- * @param {ASTNode} a Node A.
- * @param {ASTNode} b Node B.
- * @returns {number}
+ * Compare at rules and apply diff transformation.
+ * @param {AtRule[]} original Original rules set.
+ * @param {AtRule[]} expected Expected rules set.
  */
-function nodesSorter(a, b) {
-	if ('atRule' !== getNodeType(a) &amp;&amp; 'atRule' === getNodeType(b))
-		return 1;
+function transformDiffAtRules(original, expected) {
+	const diff = diffAtRules(original, expected),
+		result = [];
 
-	if ('atRule' === getNodeType(a)) {
-		if ('atRule' === getNodeType(b))
-			return compareValues(a.value, b.value);
-		return -1;
-	}
-
-	if ('rule' !== getNodeType(a) &amp;&amp; 'rule' === getNodeType(b))
-		return 1;
-
-	if ('rule' === getNodeType(a)) {
-		if ('rule' === getNodeType(b))
-			return compareValues(a.props.join(','), b.props.join(','));
-		return -1;
-	}
-
-	return 0;
-}
-
-/**
- * Merge duplicate declarations. For duplicated identifies last one would be used.
- * In order to apply this transformer use static `SortAndMerge.transform(el)`.
- */
-class SortAndMerge extends CSSTransformerBase {
-	/**
-	 * This is internal state initializer.
-	 * Use static `SortAndMerge.transform(el)` method instead.
-	 */
-	constructor() {
-		super();
-		this.rulesMaps = new WeakMap();
-		this.rootsMaps = new WeakMap();
-	}
-
-	/**
-	 * Root node transformer.
-	 * @param {Rule[]}     el             Root element.
-	 * @param {?number}    i              Root element index if any.
-	 * @param {?ASTNode[]} parentChildren Children of root element parent if there is any parent.
-	 * @param {?Function}  cb             Callback.
-	 */
-	root(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
-		let rootAnchor = Object.create(null);
-
-		el.forEach(child => {
-			if ('object' !== typeof (child.parent ?? void 0))
-				child.parent = rootAnchor;
-			else
-				rootAnchor = child.parent;
-		});
-
-		this.transformSubElements(el);
-
-		const
-			{ rootsMaps, } = this,
-			root = rootsMaps.get(rootAnchor),
-			rules = 'object' === typeof root
-				? Object.keys(root)
-				: [];
-
-		let _i = 0;
-
-		const droppedItems = [];
-		el.forEach((child, childIndex, _el) => {
-			if ([ 'rule', 'atRule', ].includes(getNodeType(child))) {
-				if (rules[_i]) {
-					_el[childIndex] = root[rules[_i]];
-					_i++;
-					return true;
-				}
-				droppedItems.push(child);
-				return false;
-			}
-			return true;
-		});
-		droppedItems.forEach(
-			item => el.splice(el.indexOf(item), 1)
+	diff.map(({ state, rule, }) => {
+		if (0 !== state) return result.push(
+			state &lt; 0
+				? (Unset.transform(rule), rule)
+				: rule
 		);
 
-		el.sort(nodesSorter).map((item, i) => el[i] = item);
-	}
+		transformDiffDeclarations(rule.original, rule.expected);
+		transformDiffRules(rule.original.children, rule.expected.children);
 
-	/**
-	 * At rule transformer.
-	 * @param {AtRule}    el             Element.
-	 * @param {number}    i              Element index.
-	 * @param {ASTNode[]} parentChildren Element's parent children list.
-	 * @param {?Function} cb             Callback.
-	 */
-	atRule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
-		this.rule(el, i, parentChildren, cb);
-		this.root(el.children, i, parentChildren, cb);
-	}
+		return result.push(rule.original);
+	});
 
-	/**
-	 * Rule transformer.
-	 * @param {Rule}      el             Element.
-	 * @param {number}    i              Element index.
-	 * @param {ASTNode[]} parentChildren Element's parent children list.
-	 * @param {?Function} cb             Callback.
-	 */
-	rule(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
-		const
-			{ rootsMaps, } = this,
-			{ parent, } = el,
-			id = 'atRule' !== getNodeType(el)
-				? el.props
-				: el.value;
-
-		if (!rootsMaps.has(parent))
-			rootsMaps.set(parent, {});
-
-		const root = rootsMaps.get(parent);
-
-		if (root[id])
-			root[id].children.forEach(child => {
-				child.parent = el;
-				el.children.unshift(child);
-			});
-
-		root[id] = el;
-
-		this.transformSubElements(el.children);
-
-		const
-			{ rulesMaps, } = this,
-			rule = rulesMaps.get(el),
-			declarations = 'object' === typeof rule
-				? Object.keys(rule).sort()
-				: [];
-
-		let _i = 0;
-
-		el.children = el.children.filter(child => {
-			if ('declaration' === getNodeType(child)) {
-				if (declarations[_i]) {
-					child.props = declarations[_i];
-					child.children = rule[declarations[_i]];
-					child.value = `${child.props}:${child.children};`;
-					_i++;
-					return true;
-				}
-				return false;
-			}
-			return true;
-		});
-
-		return;
-	}
-	/**
-	 * Declaration transformer.
-	 * @param {Declaration} el             Element.
-	 * @param {number}      i              Element index.
-	 * @param {ASTNode[]}   parentChildren Element's parent children list.
-	 * @param {?Function}   cb             Callback.
-	 */
-	declaration(el, i, parentChildren, cb) { // eslint-disable-line no-unused-vars
-		const
-			{ rulesMaps, } = this,
-			{ parent, } = el;
-
-		if (!rulesMaps.has(parent))
-			rulesMaps.set(parent, {});
-
-		const rule = rulesMaps.get(parent);
-
-		rule[el.props] = el.children;
-		return;
-	}
+	return result;
 }
 
-export default SortAndMerge;
+export default transformDiffAtRules;
 </code></pre>
         </article>
     </section>

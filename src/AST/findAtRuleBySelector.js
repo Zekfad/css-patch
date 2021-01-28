@@ -1,4 +1,4 @@
-import '../CSSTransformers/ASTTypeDefs';
+import './nodeTypes';
 
 
 /**

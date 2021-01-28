@@ -1,6 +1,6 @@
 export default diffDeclarations;
 /**
- * Compare declarations in rules.
+ * Compare declarations between rules.
  * @param {Rule} originalRule Original rule.
  * @param {Rule} expectedRule Expected rule.
  */

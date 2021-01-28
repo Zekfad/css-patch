@@ -1,15 +1,16 @@
-import './ASTTypeDefs';
-import getType from './getType';
+import '../AST/nodeTypes';
+
+import { getNodeType, } from '../AST';
 
 
 /**
  * CSS AST transformer.
- * In order to apply this transformer use static `CSSTransformer.transform(el)`.
+ * In order to apply this transformer use static `CSSTransformerBase.transform(el)`.
  */
-class CSSTransformer {
+class CSSTransformerBase {
 	/**
-	 * Transform AST with this transformer.
-	 * @param   {ASTNode | ASTNode[]} el Element.
+	 * Transform AST using this transformer.
+	 * @param {ASTNode | ASTNode[]} el Element.
 	 */
 	static transform(el) {
 		return new this().getTransformer(el)(el);
@@ -17,12 +18,12 @@ class CSSTransformer {
 
 	/**
 	 * This is internal state initializer.
-	 * Use static `CSSTransformer.transform(el)` method instead.
+	 * Use static `CSSTransformerBase.transform(el)` method instead.
 	 */
 	constructor() {}
 
 	/**
-	 * Transform all sub elements.
+	 * Transform all provided sub elements.
 	 * @param {ASTNode[]} elements Array of elements.
 	 */
 	transformSubElements(elements) {
@@ -36,7 +37,7 @@ class CSSTransformer {
 	 * @returns {Function}   Node transformer.
 	 */
 	getTransformer(el) {
-		return this[getType(el)]?.bind?.(this) ?? null;
+		return this[getNodeType(el)]?.bind?.(this) ?? null;
 	}
 
 	/**
@@ -55,7 +56,7 @@ class CSSTransformer {
 	}
 
 	/**
-	 * Declaration transformer.
+	 * At rule transformer.
 	 * @param {AtRule}    el             Element.
 	 * @param {number}    i              Element index.
 	 * @param {ASTNode[]} parentChildren Element's parent children list.
@@ -66,7 +67,7 @@ class CSSTransformer {
 	}
 
 	/**
-	 * Declaration transformer.
+	 * Rule transformer.
 	 * @param {Rule}      el             Element.
 	 * @param {number}    i              Element index.
 	 * @param {ASTNode[]} parentChildren Element's parent children list.
@@ -88,7 +89,7 @@ class CSSTransformer {
 	}
 
 	/**
-	 * Declaration transformer.
+	 * Comment transformer.
 	 * @param {Comment}   el             Element.
 	 * @param {number}    i              Element index.
 	 * @param {ASTNode[]} parentChildren Element's parent children list.
@@ -99,4 +100,4 @@ class CSSTransformer {
 	}
 }
 
-export default CSSTransformer;
+export default CSSTransformerBase;

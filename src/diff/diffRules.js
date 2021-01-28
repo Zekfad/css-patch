@@ -1,16 +1,18 @@
-import '../CSSTransformers/ASTTypeDefs';
+import '../AST/nodeTypes';
 
 import { diffArrays, } from 'diff';
 
-import getType from '../CSSTransformers/getType';
+import {
+	findRuleBySelector,
+	getNodeType,
+	getRulesSelectors,
+} from '../AST';
 
-import findRuleBySelector from './findRuleBySelector';
 import getDiffPartState from './getDiffPartState';
-import getRulesSelectors from './getRulesSelectors';
 
 
 /**
- * Compare rules in list of AST nodes.
+ * Compare rules between lists of AST nodes.
  * @param {ASTNode[]} originalNodes Original nodes list.
  * @param {ASTNode[]} expectedNodes Expected nodes list.
  */
@@ -18,7 +20,7 @@ function diffRules(originalNodes, expectedNodes) {
 	/** @type {Rule[][]} */
 	const [ original, expected, ] = [ originalNodes, expectedNodes, ].map(
 		nodes => nodes.filter(
-			child => 'rule' === getType(child)
+			child => 'rule' === getNodeType(child)
 		)
 	);
 

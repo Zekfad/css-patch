@@ -1,16 +1,16 @@
-export default CSSTransformer;
+export default CSSTransformerBase;
 /**
  * CSS AST transformer.
- * In order to apply this transformer use static `CSSTransformer.transform(el)`.
+ * In order to apply this transformer use static `CSSTransformerBase.transform(el)`.
  */
-declare class CSSTransformer {
+declare class CSSTransformerBase {
     /**
-     * Transform AST with this transformer.
-     * @param   {ASTNode | ASTNode[]} el Element.
+     * Transform AST using this transformer.
+     * @param {ASTNode | ASTNode[]} el Element.
      */
     static transform(el: ASTNode | ASTNode[]): any;
     /**
-     * Transform all sub elements.
+     * Transform all provided sub elements.
      * @param {ASTNode[]} elements Array of elements.
      */
     transformSubElements(elements: ASTNode[]): void;
@@ -29,7 +29,7 @@ declare class CSSTransformer {
      */
     root(el: Rule[], i: number | null, parentChildren: ASTNode[] | null, cb: Function | null): void;
     /**
-     * Declaration transformer.
+     * At rule transformer.
      * @param {AtRule}    el             Element.
      * @param {number}    i              Element index.
      * @param {ASTNode[]} parentChildren Element's parent children list.
@@ -37,7 +37,7 @@ declare class CSSTransformer {
      */
     atRule(el: AtRule, i: number, parentChildren: ASTNode[], cb: Function | null): void;
     /**
-     * Declaration transformer.
+     * Rule transformer.
      * @param {Rule}      el             Element.
      * @param {number}    i              Element index.
      * @param {ASTNode[]} parentChildren Element's parent children list.
@@ -53,7 +53,7 @@ declare class CSSTransformer {
      */
     declaration(el: Declaration, i: number, parentChildren: ASTNode[], cb: Function | null): void;
     /**
-     * Declaration transformer.
+     * Comment transformer.
      * @param {Comment}   el             Element.
      * @param {number}    i              Element index.
      * @param {ASTNode[]} parentChildren Element's parent children list.

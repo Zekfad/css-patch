@@ -1,6 +1,6 @@
 export default diffAtRules;
 /**
- * Compare rules in list of AST nodes.
+ * Compare at rules between lists of AST nodes.
  * @param {ASTNode[]} originalNodes Original nodes list.
  * @param {ASTNode[]} expectedNodes Expected nodes list.
  */

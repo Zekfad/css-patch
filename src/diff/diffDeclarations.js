@@ -1,15 +1,14 @@
-import '../CSSTransformers/ASTTypeDefs';
+import '../AST/nodeTypes';
 
 import { diffArrays, } from 'diff';
 
-import getType from '../CSSTransformers/getType';
+import { findDeclarationByKey, getNodeType, } from '../AST';
 
-import findDeclarationByKey from './findDeclarationByKey';
 import getDiffPartState from './getDiffPartState';
 
 
 /**
- * Compare declarations in rules.
+ * Compare declarations between rules.
  * @param {Rule} originalRule Original rule.
  * @param {Rule} expectedRule Expected rule.
  */
@@ -17,7 +16,7 @@ function diffDeclarations(originalRule, expectedRule) {
 	/** @type {Declaration[][]} */
 	const [ original, expected, ] = [ originalRule, expectedRule, ].map(
 		rule => rule.children.filter(
-			child => 'declaration' === getType(child)
+			child => 'declaration' === getNodeType(child)
 		)
 	);
 
