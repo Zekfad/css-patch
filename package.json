@@ -10,13 +10,15 @@
 	},
 	"module": "./dist/esm/bundle.js",
 	"name": "css-patch",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "CSS patch generator.",
 	"keywords": [
 		"css",
 		"diff",
 		"patch",
-		"stylesheets"
+		"stylesheets",
+		"stylesheet",
+		"transformer"
 	],
 	"homepage": "https://github.com/Zekfad/css-patch",
 	"bugs": {
