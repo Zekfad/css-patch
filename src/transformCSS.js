@@ -12,7 +12,7 @@ import { compile, serialize, stringify, } from 'stylis';
 function transformCSS(css, transformer) {
 	const ast = compile(css);
 
-	let result = transformer(css);
+	let result = transformer(ast);
 
 	return serialize(
 		result || ast,
