@@ -50,6 +50,36 @@ describe('Package', () => {
 				),
 				'a{a1:unset;b1:unset;a:2;b:1;}a a{a:1;}b{b:1;}c{a:1;}d{a:1;}@a{a{a:unset;b:unset;}}@b{a{a1:unset;b1:unset;}}'
 			);
+
+		});
+
+
+		it('should handle rules in at rules', () => {
+
+			assert.strictEqual(
+				generateCSSPatch(
+					'@a{a{a:1;b:1;}}',
+					'@a{a{a:2;b:1;}}'
+				),
+				'@a{a{a:2;}}'
+			);
+
+			assert.strictEqual(
+				generateCSSPatch(
+					'@a{a{a:1;b:1;}}',
+					'@a{a{a:2;}}'
+				),
+				'@a{a{a:2;b:unset;}}'
+			);
+
+			assert.strictEqual(
+				generateCSSPatch(
+					'@a{a{a:1;}}',
+					'@a{a{a:1;b:1;}}'
+				),
+				'@a{a{b:1;}}'
+			);
+
 		});
 
 	});
