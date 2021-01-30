@@ -10,7 +10,7 @@
 	},
 	"module": "./dist/esm/bundle.js",
 	"name": "css-patch",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "CSS patch generator.",
 	"keywords": [
 		"css",
