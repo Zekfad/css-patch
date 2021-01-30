@@ -137,7 +137,7 @@ class SortAndMerge extends CSSTransformerBase {
 			{ rootsMaps, } = this,
 			{ parent, } = el,
 			id = 'atRule' !== getNodeType(el)
-				? el.props
+				? el.props.join(',')
 				: el.value;
 
 		if (!rootsMaps.has(parent))
@@ -153,7 +153,10 @@ class SortAndMerge extends CSSTransformerBase {
 
 		root[id] = el;
 
-		this.transformSubElements(el.children);
+		if ('atRule' !== getNodeType(el))
+			this.transformSubElements(el.children);
+		else
+			this.transformSubElements(el.children, [ 'declaration', ], true);
 
 		const
 			{ rulesMaps, } = this,
@@ -164,7 +167,8 @@ class SortAndMerge extends CSSTransformerBase {
 
 		let _i = 0;
 
-		el.children = el.children.filter(child => {
+		const droppedItems = [];
+		el.children.forEach(child => {
 			if ('declaration' === getNodeType(child)) {
 				if (declarations[_i]) {
 					child.props = declarations[_i];
@@ -173,10 +177,14 @@ class SortAndMerge extends CSSTransformerBase {
 					_i++;
 					return true;
 				}
+				droppedItems.push(child);
 				return false;
 			}
 			return true;
 		});
+		droppedItems.forEach(
+			item => el.children.splice(el.children.indexOf(item), 1)
+		);
 
 		return;
 	}

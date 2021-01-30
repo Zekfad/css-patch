@@ -10,10 +10,12 @@ declare class CSSTransformerBase {
      */
     static transform(el: ASTNode | ASTNode[]): any;
     /**
-     * Transform all provided sub elements.
-     * @param {ASTNode[]} elements Array of elements.
+     * Transform all (or with exclusions) provided sub elements.
+     * @param {ASTNode[]} elements  Array of elements.
+     * @param {?string[]} list      Blacklist or whitelist of types.
+     * @param {?boolean}  whitelist Whatever to use whitelist.
      */
-    transformSubElements(elements: ASTNode[]): void;
+    transformSubElements(elements: ASTNode[], list: string[] | null, whitelist: boolean | null): void;
     /**
      * Get node transformer.
      * @param   {ASTNode} el Element.

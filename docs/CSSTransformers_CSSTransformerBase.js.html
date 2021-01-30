@@ -75,12 +75,22 @@ class CSSTransformerBase {
 	constructor() {}
 
 	/**
-	 * Transform all provided sub elements.
-	 * @param {ASTNode[]} elements Array of elements.
+	 * Transform all (or with exclusions) provided sub elements.
+	 * @param {ASTNode[]} elements  Array of elements.
+	 * @param {?string[]} list      Blacklist or whitelist of types.
+	 * @param {?boolean}  whitelist Whatever to use whitelist.
 	 */
-	transformSubElements(elements) {
-		return elements.forEach((child, _i, _children) =>
-			this.getTransformer(child)(child, _i, _children));
+	transformSubElements(elements, list, whitelist) {
+		return elements.forEach((child, _i, _children) => {
+			if (
+				list &amp;&amp; (
+					(whitelist &amp;&amp; !list.includes(getNodeType(child))) ||
+					(!whitelist &amp;&amp; list.includes(getNodeType(child)))
+				)
+			)
+				return;
+			this.getTransformer(child)(child, _i, _children);
+		});
 	}
 
 	/**
