@@ -10,7 +10,7 @@
 	},
 	"module": "./dist/esm/bundle.js",
 	"name": "css-patch",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "CSS patch generator.",
 	"keywords": [
 		"css",
@@ -20,7 +20,7 @@
 		"stylesheet",
 		"transformer"
 	],
-	"homepage": "https://github.com/Zekfad/css-patch",
+	"homepage": "https://zekfad.github.io/css-patch",
 	"bugs": {
 		"url": "https://github.com/Zekfad/css-patch/issues",
 		"email": "zekfad@znnme.eu.org"
