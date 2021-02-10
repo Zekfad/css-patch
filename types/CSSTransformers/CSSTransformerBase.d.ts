@@ -2,6 +2,11 @@ export default CSSTransformerBase;
 /**
  * CSS AST transformer.
  * In order to apply this transformer use static `CSSTransformerBase.transform(el)`.
+ * Advanced usage notes:
+ * This is a base class for CSS AST transformer.
+ * You can subclass this class to implement your transformer.
+ * Just remember to call `this.transformSubElements(el.children)`
+ * if you deal with multi-level items (roots, rules, at rules).
  */
 declare class CSSTransformerBase {
     /**

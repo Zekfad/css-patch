@@ -61,8 +61,22 @@
     <section>
         <article class="readme"><h1>css-patch</h1>
 <p><a href="https://www.npmjs.com/package/css-patch"><img src="https://img.shields.io/npm/v/css-patch?style=for-the-badge" alt="npm version"></a><img src="https://img.shields.io/node/v/css-patch?style=for-the-badge" alt="node version"><a href="https://travis-ci.com/github/Zekfad/css-patch"><img src="https://img.shields.io/travis/com/Zekfad/css-patch?style=for-the-badge&amp;logo=linux&amp;logoColor=white" alt="Build status - Linux/OSX"></a><a href="https://ci.appveyor.com/project/Zekfad/css-patch"><img src="https://img.shields.io/appveyor/build/Zekfad/css-patch?style=for-the-badge&amp;logo=windows&amp;logoColor=white" alt="Build status - Windows"></a><a href="https://codecov.io/gh/Zekfad/css-patch"><img src="https://img.shields.io/codecov/c/gh/Zekfad/css-patch?style=for-the-badge" alt="Codecov"></a></p>
-<p>css-patch module.</p>
-<h2>Features</h2>
+<p>Generating CSS patches (just like a diff).</p>
+<h2>Reasons to use</h2>
+<h3>Themes generation</h3>
+<p>The easiest way to make a new theme is just copy the file and change some stuff
+or if you use preprocessor (such as SCSS, Less, etc.) you can just change some
+variables and get a new style.</p>
+<p>But serving files with big amount of literally the same code is not a good idea,
+so this is when css-patch can help you.</p>
+<p>You can pass 2 stylesheets (<code>original</code>/<code>base</code> and <code>expected</code>) to <code>generateCSSPatch</code>
+and get a new stylesheet. This new stylesheet is intended to be applied after
+<code>original</code> one and will have the same effect as if you applied <code>expected</code> one.
+In other words, the new stylesheet will consist of the resulting &quot;overloads&quot; for
+the <code>original</code> one.</p>
+<h3>Extracting difference</h3>
+<p>Imagine if you have two versions of the same CSS.</p>
+<p>You can use this module to get the &quot;difference&quot; between them.</p>
 <h2>Install</h2>
 <p>Install via yarn:</p>
 <pre class="prettyprint source"><code>yarn add css-patch
@@ -72,7 +86,21 @@
 </code></pre>
 <h2>Docs</h2>
 <p><a href="https://zekfad.github.io/css-patch/">Read the docs on GitHub pages.</a></p>
-<h2>Example</h2>
+<p>For advanced usage see the docs for <a href="https://zekfad.github.io/css-patch/global.html#transformCSS"><code>transformCSS</code></a> function and <a href="https://zekfad.github.io/css-patch/CSSTransformerBase.html"><code>CSSTransformerBase</code></a> class.</p>
+<h2>Possible caveats</h2>
+<h3><code>unset</code></h3>
+<p>If something existed in <code>original</code> stylesheet missing in <code>expected</code> one,
+will result of being transformed to <code>&lt;something&gt;: unset;</code>.</p>
+<h3>Combined rule orders</h3>
+<p>Logically the same but with a different order combined rules (e.g. <code>.a,.b</code> and <code>.b,.a</code>)
+will be considered as a different rules.</p>
+<h3>Merged rules</h3>
+<p>If rules have exact the same name their declarations would be merged (later appeared
+declarations will be a higher priority).</p>
+<p>For example <code>.a{a:1;c:3;}.a{a:2;b:2;}</code> will be threat as <code>.a{a:2;b:2;c;3}</code>.</p>
+<h3>Sorting</h3>
+<p>Declarations are sorted alphabetically.</p>
+<h2>Usage example</h2>
 <h3>Import</h3>
 <h4>CommonJS</h4>
 <pre class="prettyprint source lang-js"><code>const { generateCSSPatch, } = require('css-patch');
