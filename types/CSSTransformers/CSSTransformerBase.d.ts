@@ -1,12 +1,14 @@
 export default CSSTransformerBase;
 /**
  * CSS AST transformer.
- * In order to apply this transformer use static `CSSTransformerBase.transform(el)`.
+ * To apply this transformer call `CSSTransformerBase.transform(el)`.
+ * Base class for CSS AST transformer.
  * Advanced usage notes:
- * This is a base class for CSS AST transformer.
- * You can subclass this class to implement your transformer.
- * Just remember to call `this.transformSubElements(el.children)`
- * if you deal with multi-level items (roots, rules, at rules).
+ * You can subclass it to implement your own transformer.
+ * Just remember to call `this.transformSubElements(el.children)` if you deal
+ * with multi-level items (roots, rules, at rules).
+ * @memberof CSSTransformers
+ * @class
  */
 declare class CSSTransformerBase {
     /**
@@ -18,7 +20,7 @@ declare class CSSTransformerBase {
      * Transform all (or with exclusions) provided sub elements.
      * @param {ASTNode[]} elements  Array of elements.
      * @param {?string[]} list      Blacklist or whitelist of types.
-     * @param {?boolean}  whitelist Whatever to use whitelist.
+     * @param {?boolean}  whitelist Whether list is whitelist or blacklist.
      */
     transformSubElements(elements: ASTNode[], list: string[] | null, whitelist: boolean | null): void;
     /**

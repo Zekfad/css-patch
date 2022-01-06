@@ -1,7 +1,9 @@
 export default UpdateDeclarations;
 /**
  * Update all declarations.
- * In order to apply this transformer use static `UpdateDeclarations.transform(el)`.
+ * To apply this transformer call `UpdateDeclarations.transform(el)`.
+ * @memberof CSSTransformers
+ * @class
  */
 declare class UpdateDeclarations extends CSSTransformerBase {
 }

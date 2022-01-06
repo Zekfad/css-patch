@@ -1,3 +1,7 @@
+/**
+ * CSSTransformers namespace
+ * @namespace CSSTransformers
+ */
 import CSSTransformerBase from './CSSTransformerBase';
 import SortAndMerge from './SortAndMerge';
 import Unset from './Unset';

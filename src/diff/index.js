@@ -1,3 +1,7 @@
+/**
+ * Diff namespace
+ * @namespace diff
+ */
 import diffAtRules from './diffAtRules';
 import diffDeclarations from './diffDeclarations';
 import diffRules from './diffRules';

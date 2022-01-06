@@ -6,6 +6,7 @@ import diffDeclarations from './diffDeclarations';
 
 /**
  * Compare declarations between rules and apply diff transformation.
+ * @memberof diff
  * @param {Rule} originalRule Original rule.
  * @param {Rule} expectedRule Expected rule.
  * @returns {Rule}

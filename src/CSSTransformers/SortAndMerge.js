@@ -7,6 +7,7 @@ import CSSTransformerBase from './CSSTransformerBase';
 
 /**
  * Compare values.
+ * @memberof CSSTransformers
  * @param {any} a Value A.
  * @param {any} b Value B.
  * @returns {number}
@@ -24,6 +25,7 @@ function compareValues(a, b) {
  * Higher means closer to the start.
  * Sorting rule is simple: atRule > rule > anything else.
  * Same typed nodes are sorted in alphabetic order.
+ * @memberof CSSTransformers
  * @param {ASTNode} a Node A.
  * @param {ASTNode} b Node B.
  * @returns {number}
@@ -52,12 +54,14 @@ function nodesSorter(a, b) {
 
 /**
  * Merge duplicate declarations. For duplicated identifies last one would be used.
- * In order to apply this transformer use static `SortAndMerge.transform(el)`.
+ * To apply this transformer call `SortAndMerge.transform(el)`.
+ * @memberof CSSTransformers
+ * @class
  */
 class SortAndMerge extends CSSTransformerBase {
 	/**
-	 * This is internal state initializer.
-	 * Use static `SortAndMerge.transform(el)` method instead.
+	 * Internal state initializer.
+	 * To apply transformer use `SortAndMerge.transform(el)` instead.
 	 */
 	constructor() {
 		super();

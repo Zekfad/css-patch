@@ -1,3 +1,7 @@
+/**
+ * AST namespace
+ * @namespace AST
+ */
 import findAtRuleBySelector from './findAtRuleBySelector';
 import findDeclarationByKey from './findDeclarationByKey';
 import findRuleBySelector from './findRuleBySelector';

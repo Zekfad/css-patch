@@ -9,6 +9,7 @@ import getDiffPartState from './getDiffPartState';
 
 /**
  * Compare declarations between rules.
+ * @memberof diff
  * @param {Rule} originalRule Original rule.
  * @param {Rule} expectedRule Expected rule.
  */

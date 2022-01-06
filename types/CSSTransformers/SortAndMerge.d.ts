@@ -1,7 +1,9 @@
 export default SortAndMerge;
 /**
  * Merge duplicate declarations. For duplicated identifies last one would be used.
- * In order to apply this transformer use static `SortAndMerge.transform(el)`.
+ * To apply this transformer call `SortAndMerge.transform(el)`.
+ * @memberof CSSTransformers
+ * @class
  */
 declare class SortAndMerge extends CSSTransformerBase {
     rulesMaps: WeakMap<object, any>;
